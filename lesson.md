@@ -124,7 +124,8 @@
 # Глава 23. Работа с XML
 - Ресурсы XML и их парсинг
 - Получение xml по сети
-# Jetpack Compose
+
+# Глава 25. Jetpack Compose
 ---
 # Глава 1. Введение в Jetpack Compose
 - Что такое Jetpack Compose
