@@ -1,6 +1,6 @@
 # Fragments
 
-MainActivity.kt
+## MainActivity.kt
 
 ```kotlin
 package com.example.fragmentnavigationapp
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 ```
-activity_main.xml
+## activity_main.xml
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -37,7 +37,7 @@ w
 ```
 
 
-welcom_fragment.xml
+## welcom_fragment.xml
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -67,7 +67,7 @@ welcom_fragment.xml
 
 
 
-WelcomFragment.kt
+## WelcomFragment.kt
 
 ```kotlin
 package com.example.fragmentnavigationapp
@@ -101,9 +101,9 @@ class WelcomeFragment : Fragment() {
 }
 ```
 
-# Котроллер навигации
+# Контроллер навигации
 
-navigation/nav_graph.xml
+## navigation/nav_graph.xml
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
