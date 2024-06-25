@@ -1,5 +1,9 @@
 # Kotlin Jetpack Compose
 
+# Ресурсы
+
+- https://github.com/android/compose-samples
+
 # MainActivity.kt
 
 ```kt
