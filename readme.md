@@ -3,6 +3,7 @@
 # Ресурсы
 
 - https://github.com/android/compose-samples
+- https://play.kotlinlang.org/
 
 # MainActivity.kt
 
