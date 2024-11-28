@@ -1,5 +1,11 @@
 # Kotlin Jetpack Compose
 
+# Configuration
+
+- Android Studio: Koala 2024
+- Android Gradle Plugin: 8.5.0
+- Gradle Version: 8.7
+
 # BottomBar
 
 ```kt
