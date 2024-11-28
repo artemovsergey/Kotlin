@@ -55,7 +55,7 @@ class ProductListViewModel @Inject constructor(
 }
 ```
 
-# ProductList
+# ProductItemList
 
 ```kt
 @Composable
