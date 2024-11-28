@@ -1,5 +1,152 @@
 # Kotlin Jetpack Compose
 
+# BottomBar
+
+```kt
+package com.example.ordernow.ui.patterns
+
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.ordernow.common.navigation.NavigationBarSection
+import com.example.ordernow.ui.theme.orange
+
+@Composable
+fun OrderNowBottomBar(navController: NavHostController) {
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    BottomNavigation(
+        backgroundColor = MaterialTheme.colors.background,
+        contentColor = contentColorFor(MaterialTheme.colors.background),
+        elevation = 10.dp
+    ) {
+        NavigationBarSection.sections.forEach { section ->
+            val selected =
+                currentDestination?.hierarchy?.any {
+                    it.route == section.route
+                } == true
+            BottomNavigationItem(
+                icon = {
+                    Icon(
+                        imageVector = section.icon,
+                        contentDescription = stringResource(section.title)
+                    )
+                },
+                label = { Text(text = stringResource(section.title)) },
+                selected = selected,
+                unselectedContentColor = Color.Gray,
+                selectedContentColor = orange,
+                onClick = {
+                    navController.navigate(section.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                })
+        }
+    }
+}
+```
+
+# TopBar
+
+```kt
+package com.example.ordernow.ui.patterns
+
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.ordernow.R
+import com.example.ordernow.common.navigation.popUp
+import com.example.ordernow.main.OrderNowState
+
+@Composable
+fun OrderNowTopBar(appState: OrderNowState) {
+    if (appState.shouldShowArrowBack) {
+        TopAppBarWithArrow(
+            title = stringResource(id = R.string.app_name),
+            goBack = appState.popUp()
+        )
+    } else {
+        TopAppBarWithoutArrow(
+            title = stringResource(id = R.string.app_name)
+        )
+    }
+}
+
+@Composable
+fun TopAppBarWithoutArrow(
+    title: String,
+) {
+    TopAppBar(
+        title = {
+            Text(
+                text = title,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        },
+        backgroundColor = MaterialTheme.colors.background,
+        contentColor = contentColorFor(MaterialTheme.colors.background)
+    )
+}
+
+@Composable
+fun TopAppBarWithArrow(
+    title: String,
+    goBack: () -> Unit,
+) {
+    TopAppBar(
+        title = {
+            Text(
+                text = title,
+                textAlign = TextAlign.Start,
+                modifier = Modifier.fillMaxWidth()
+            )
+        },
+        backgroundColor = MaterialTheme.colors.background,
+        contentColor = contentColorFor(MaterialTheme.colors.background),
+        navigationIcon = {
+            IconButton(onClick = goBack) {
+                Icon(Icons.Filled.ArrowBack, "BackIcon")
+            }
+        })
+}
+
+@Preview
+@Composable
+fun PreviewTopAppBarWithoutArrow() {
+    TopAppBarWithoutArrow(
+        title = "OrderNow"
+    )
+}
+
+@Preview
+@Composable
+fun PreviewTopAppBarWithArrow() {
+    TopAppBarWithArrow(
+        title = "OrderNow",
+        goBack = {}
+    )
+}
+```
+
 # Stateless View
 
 ```kt
